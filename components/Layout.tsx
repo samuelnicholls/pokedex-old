@@ -1,12 +1,15 @@
 import Head from 'next/head'
 import React, { FunctionComponent, ReactNode } from 'react'
+import Button from '../components/Button'
 
 type Props = {
   title: string
   children: ReactNode
+  showBackButton?: boolean
+  backButtonOnClick?: (event: React.MouseEvent<HTMLButtonElement>) => void
 }
 
-const Layout: FunctionComponent<Props> = ({ title, children }) => {
+const Layout: FunctionComponent<Props> = ({ title, children, showBackButton, backButtonOnClick }) => {
   return (
     <div className="bg-neutral-500">
       <Head>
@@ -14,6 +17,9 @@ const Layout: FunctionComponent<Props> = ({ title, children }) => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main className="container mx-auto min-h-screen py-6 px-4 lg:py-16">
+        {showBackButton && backButtonOnClick && (
+          <Button title='Back' onClick={backButtonOnClick} />
+        )}
         {children}
       </main>
     </div>

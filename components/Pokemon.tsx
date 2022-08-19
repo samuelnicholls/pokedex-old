@@ -10,6 +10,12 @@ type Pokemon = {
   url: string
 }
 
+type PokemonType = {
+  type: {
+    name: string
+  }
+}
+
 type Props = {
   pokemon: Pokemon
 }
@@ -18,7 +24,7 @@ const Pokemon: FunctionComponent<Props> = ({ pokemon }) => {
   const pokemonIndex = pokemon.url.split('/')[pokemon.url.split('/').length - 2];
   const imageUrl = `https://img.pokemondb.net/sprites/home/normal/${pokemon.name}.png`
 
-  const { isLoading, error, data, isFetching } = useQuery(["fetchSinglePokemon", pokemon.name], () => fetchSinglePokemon(pokemon.name))
+  const { data } = useQuery(["fetchSinglePokemon", pokemon.name], () => fetchSinglePokemon(pokemon.name))
 
   return (
     <Link href={`/pokemon/${pokemon.name}`}>
@@ -37,7 +43,7 @@ const Pokemon: FunctionComponent<Props> = ({ pokemon }) => {
           <p className='text-center text-2xl mb-4 capitalize mt-4'>{pokemon.name}</p>
         </div>
         <ul className='mt-4 pb-2 flex flex-wrap justify-center gap-2'>
-          {data?.response.types.map((type: any, index: number) => (
+          {data?.response.types.map((type: PokemonType, index: number) => (
             <li key={index}>{showPokemonType(type.type.name)}</li>
           ))}
         </ul>

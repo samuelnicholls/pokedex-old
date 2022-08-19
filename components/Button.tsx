@@ -2,8 +2,8 @@ import React, { FunctionComponent } from 'react'
 
 type Props = {
   title: string
-  onClick?: (event: React.MouseEvent<HTMLButtonElement>) => void
-  disabled: boolean
+  onClick: (event: React.MouseEvent<HTMLButtonElement>) => void
+  disabled?: boolean
 }
 
 const Button: FunctionComponent<Props> = ({ title, onClick, disabled }) => {
