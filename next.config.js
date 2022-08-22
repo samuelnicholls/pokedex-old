@@ -1,16 +1,15 @@
 /** @type {import('next').NextConfig} */
-const isProd = process.env.NODE_ENV === 'production'
-
 const nextConfig = {
   reactStrictMode: true,
   images: {
-    loader: 'akamai',
-    path: '',
     domains: [
       'img.pokemondb.net',
     ],
   },
-  assetPrefix: './',
+  env: {
+    PUBLIC_URL: "https://samuelnicholls.github.io/pokedex",
+    assetPrefix: './'
+  }
 }
 
 module.exports = nextConfig
