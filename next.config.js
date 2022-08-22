@@ -6,10 +6,6 @@ const nextConfig = {
       'img.pokemondb.net',
     ],
   },
-  env: {
-    PUBLIC_URL: "https://samuelnicholls.github.io/pokedex",
-    assetPrefix: './'
-  }
 }
 
 module.exports = nextConfig
