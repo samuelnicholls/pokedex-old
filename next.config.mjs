@@ -4,13 +4,13 @@ const isProd = process.env.NODE_ENV === 'production'
 const nextConfig = {
   reactStrictMode: true,
   images: {
-    loader: 'imgix',
-    path: '/',
+    loader: 'akamai',
+    path: '',
     domains: [
       'img.pokemondb.net',
     ],
   },
-  assetPrefix: isProd ? '/pokedex/' : ''
+  assetPrefix: './',
 }
 
 module.exports = nextConfig
