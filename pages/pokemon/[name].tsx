@@ -6,11 +6,18 @@ import Layout from '../../components/Layout'
 import Title from '../../components/Title'
 import Loader from '../../components/Loader'
 import showPokemonType from '../../utils/showPokemonType'
+import React, { FunctionComponent } from 'react'
+
 type PokemonType = {
   type: {
     name: string
   }
 }
+
+type Props = {
+  title: string
+}
+
 export default function Pokemon() {
   
   const router = useRouter()
@@ -23,7 +30,39 @@ export default function Pokemon() {
   const backImageUrl = `https://img.pokemondb.net/sprites/home/back-normal/${pokemonName}.png`
   const pokemonData = data?.response
 
+  console.log("poke", pokemonData)
+
   const pageTitle = pokemonName ? pokemonName : 'Pokemon'
+
+  type StatRowProps = {
+    title: string
+    children: any
+    noBorderTop?: any
+  }
+
+  type StatItemProps = {
+    title?: string
+    attribute: any
+  }
+  
+  const StatRow: FunctionComponent<StatRowProps> = ({ title, children, noBorderTop }) => {
+    return (
+      <div className={`flex flex-col items-center pt-3 ${noBorderTop ? "" : "border-solid border-0 border-t border-white lg:border-0"}`}>
+      <h2 className='text-xl mb-6'>{title}</h2>
+        {children}
+
+    </div>
+    )
+  }
+
+  const StatItem: FunctionComponent<StatItemProps> = ({ title, attribute }) => {
+    return (
+      <>
+          <p className='capitalize'>{title ? <strong>{title.replace(/-/g, ' ')}:</strong> : null} {attribute}</p>
+      </>
+  
+    )
+  }
 
   return (
     <Layout title={`Pokedex | ${pageTitle}`} showBackButton={true} backButtonOnClick={() => router.back()}>
@@ -47,27 +86,21 @@ export default function Pokemon() {
           ))}
         </ul>
           </div>
-          <div className='grid lg:grid-cols-3 gap-4 border-solid border-0 border-t border-white  mt-8 pt-8'>
-            <div className='flex flex-col items-center'>
-              <h2 className='text-xl mb-6'>Profile</h2>
-              <p>Height: 0.7m</p>
-              <p>Weight: 69kg</p>
-            </div>
-            <div className='flex flex-col items-center'>
-              <h2 className='text-xl mb-6'>Stats</h2>
-              <p>HP: 44</p>
-              <p>Attack: 24 </p>
-              <p>Defense: 79</p>
-              <p>Special Attack: 88</p>
-              <p>Special Defense: 12</p>
-              <p>Speed: 34</p>
-            </div>
-            <div className='flex flex-col items-center'>
-              <h2 className='text-xl mb-6'>Abilites</h2>
-              <p>Overgrown</p>
-              <p>Chlorophyll</p>
-            </div>
-
+          <div className='grid lg:grid-cols-3 gap-4 border-solid border-0 border-t border-white  mt-8 pt-5'>
+            <StatRow title='Profile' noBorderTop={true}>
+              <StatItem title='height' attribute={pokemonData.height / 10 + " m"} />
+              <StatItem title='weight' attribute={pokemonData.weight / 10 + " kg"} />
+            </StatRow>
+            <StatRow title='Stats'>
+              {pokemonData.stats.map((stat: any, index: number) => (
+                <StatItem title={stat.stat.name} attribute={stat.base_stat} />
+              ))}
+            </StatRow>
+            <StatRow title='Abilities'>
+            {pokemonData.abilities.map((ability: any, index: number) => (
+              <StatItem attribute={ability.ability.name} />
+            ))}
+            </StatRow>
           </div>
 
         </div>
