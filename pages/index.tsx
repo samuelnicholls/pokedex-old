@@ -21,8 +21,7 @@ const Home: NextPage = () => {
     isFetchingNextPage
   } = useInfiniteQuery("fetchAllPokemon", fetchAllPokemon, {
     getNextPageParam: (lastPage) => lastPage.nextPage
-  });
-
+  })
   const decideButtonText = isFetchingNextPage ? "Loading..." : hasNextPage ? "Load More" : "Nothing more to load"
 
   return (

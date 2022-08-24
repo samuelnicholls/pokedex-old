@@ -1,4 +1,5 @@
 import { useQuery } from 'react-query';
+import React, { FunctionComponent } from 'react'
 import fetchSinglePokemon from '../../pages/api/fetchSinglePokemon'
 import { useRouter } from 'next/router'
 import Image from 'next/image'
@@ -6,7 +7,8 @@ import Layout from '../../components/Layout'
 import Title from '../../components/Title'
 import Loader from '../../components/Loader'
 import showPokemonType from '../../utils/showPokemonType'
-import React, { FunctionComponent } from 'react'
+import DataRow from '../../components/DataRow'
+import DataItem from '../../components/DataItem'
 
 type PokemonType = {
   type: {
@@ -14,55 +16,14 @@ type PokemonType = {
   }
 }
 
-type Props = {
-  title: string
-}
-
 export default function Pokemon() {
-  
   const router = useRouter()
   const { name } = router.query
-
   const pokemonName = name?.toString();
-  const { isLoading, error, data, isFetching } = useQuery(["fetchSinglePokemon", pokemonName], () => fetchSinglePokemon(pokemonName))
-
+  const { isLoading, data } = useQuery(["fetchSinglePokemon", pokemonName], () => fetchSinglePokemon(pokemonName))
   const imageUrl = `https://img.pokemondb.net/sprites/home/normal/${pokemonName}.png`
-  const backImageUrl = `https://img.pokemondb.net/sprites/home/back-normal/${pokemonName}.png`
   const pokemonData = data?.response
-
-  console.log("poke", pokemonData)
-
   const pageTitle = pokemonName ? pokemonName : 'Pokemon'
-
-  type StatRowProps = {
-    title: string
-    children: any
-    noBorderTop?: any
-  }
-
-  type StatItemProps = {
-    title?: string
-    attribute: any
-  }
-  
-  const StatRow: FunctionComponent<StatRowProps> = ({ title, children, noBorderTop }) => {
-    return (
-      <div className={`flex flex-col items-center pt-3 ${noBorderTop ? "" : "border-solid border-0 border-t border-white lg:border-0"}`}>
-      <h2 className='text-xl mb-6'>{title}</h2>
-        {children}
-
-    </div>
-    )
-  }
-
-  const StatItem: FunctionComponent<StatItemProps> = ({ title, attribute }) => {
-    return (
-      <>
-          <p className='capitalize'>{title ? <strong>{title.replace(/-/g, ' ')}:</strong> : null} {attribute}</p>
-      </>
-  
-    )
-  }
 
   return (
     <Layout title={`Pokedex | ${pageTitle}`} showBackButton={true} backButtonOnClick={() => router.back()}>
@@ -87,20 +48,20 @@ export default function Pokemon() {
         </ul>
           </div>
           <div className='grid lg:grid-cols-3 gap-4 border-solid border-0 border-t border-white  mt-8 pt-5'>
-            <StatRow title='Profile' noBorderTop={true}>
-              <StatItem title='height' attribute={pokemonData.height / 10 + " m"} />
-              <StatItem title='weight' attribute={pokemonData.weight / 10 + " kg"} />
-            </StatRow>
-            <StatRow title='Stats'>
+            <DataRow title='Profile' noBorderTop={true}>
+              <DataItem index={0} title='Height' attribute={pokemonData.height / 10 + " m"} />
+              <DataItem index={1} title='Weight' attribute={pokemonData.weight / 10 + " kg"} />
+            </DataRow>
+            <DataRow title='Stats'>
               {pokemonData.stats.map((stat: any, index: number) => (
-                <StatItem title={stat.stat.name} attribute={stat.base_stat} />
+                <DataItem index={index} title={stat.stat.name} attribute={stat.base_stat} />
               ))}
-            </StatRow>
-            <StatRow title='Abilities'>
+            </DataRow>
+            <DataRow title='Abilities'>
             {pokemonData.abilities.map((ability: any, index: number) => (
-              <StatItem attribute={ability.ability.name} />
+              <DataItem index={index} attribute={ability.ability.name} />
             ))}
-            </StatRow>
+            </DataRow>
           </div>
 
         </div>
