@@ -18,7 +18,9 @@ const Layout: FunctionComponent<Props> = ({ title, children, showBackButton, bac
       </Head>
       <main className="container mx-auto min-h-screen py-6 px-4 lg:py-16">
         {showBackButton && backButtonOnClick && (
-          <Button title='Back' onClick={backButtonOnClick} />
+          <div className='mb-4'>
+            <Button title='Back' onClick={backButtonOnClick} />
+          </div>
         )}
         {children}
       </main>

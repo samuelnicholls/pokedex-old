@@ -6,6 +6,7 @@ import Pokemon from '../components/Pokemon'
 import Button from '../components/Button'
 import Loader from '../components/Loader'
 import Title from '../components/Title'
+import Error from '../components/Error'
 
 type PokemonType = {
   name: string
@@ -15,10 +16,13 @@ type PokemonType = {
 const Home: NextPage = () => {
   const {
     data,
+    error,
     isLoading,
     fetchNextPage,
     hasNextPage,
-    isFetchingNextPage
+    isFetchingNextPage,
+    status
+
   } = useInfiniteQuery("fetchAllPokemon", fetchAllPokemon, {
     getNextPageParam: (lastPage) => lastPage.nextPage
   })
@@ -26,8 +30,12 @@ const Home: NextPage = () => {
 
   return (
     <Layout title="Pokedex">
-      <Title text='Pokedex' />
-      {isLoading ? (
+      <Title text="Pokedex" />
+      <>
+      {error && (
+        <Error />
+      )}
+      { isLoading ? (
         <Loader />
       ) : (
         <>
@@ -38,11 +46,15 @@ const Home: NextPage = () => {
               ))
             )}
           </ul>
-          <div className='mt-8 flex justify-center'>
-            <Button title={decideButtonText} onClick={() => fetchNextPage()} disabled={!hasNextPage || isFetchingNextPage} />
-          </div>
+          {!error && (
+            <div className='mt-8 flex justify-center'>
+              <Button title={decideButtonText} onClick={() => fetchNextPage()} disabled={!hasNextPage || isFetchingNextPage} />
+            </div>
+          )}
         </>
       )}
+      </>
+
     </Layout>
   );
 }
