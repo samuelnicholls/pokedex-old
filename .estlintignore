@@ -1,0 +1,11 @@
+.next
+dist
+node_modules/
+build
+public/
+.prettierignore
+.prettierrc.json
+next.config.js
+.DS_Store
+.estlintignore
+.gitignore
