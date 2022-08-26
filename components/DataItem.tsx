@@ -3,12 +3,11 @@ import React, { FunctionComponent, ReactNode } from "react";
 type Props = {
   title?: string;
   attribute: string | number;
-  index: any;
 };
 
-const DataItem: FunctionComponent<Props> = ({ title, attribute, index }) => {
+const DataItem: FunctionComponent<Props> = ({ title, attribute }) => {
   return (
-    <li className="sdsds" key={index}>
+    <li>
       <p className="capitalize">
         {title ? <strong>{title.replace(/-/g, " ")}:</strong> : null}{" "}
         {attribute}

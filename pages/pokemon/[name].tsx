@@ -57,12 +57,12 @@ export default function Pokemon() {
           <div className="grid lg:grid-cols-3 gap-4 border-solid border-0 border-t border-white  mt-8 pt-5">
             <DataRow title="Profile" noBorderTop={true}>
               <DataItem
-                index={0}
+                key={0}
                 title="Height"
                 attribute={pokemonData.height / 10 + " m"}
               />
               <DataItem
-                index={1}
+                key={1}
                 title="Weight"
                 attribute={pokemonData.weight / 10 + " kg"}
               />
@@ -70,7 +70,7 @@ export default function Pokemon() {
             <DataRow title="Stats">
               {pokemonData.stats.map((stat: any, index: number) => (
                 <DataItem
-                  index={index}
+                  key={index}
                   title={stat.stat.name}
                   attribute={stat.base_stat}
                 />
@@ -78,7 +78,7 @@ export default function Pokemon() {
             </DataRow>
             <DataRow title="Abilities">
               {pokemonData.abilities.map((ability: any, index: number) => (
-                <DataItem index={index} attribute={ability.ability.name} />
+                <DataItem key={index} attribute={ability.ability.name} />
               ))}
             </DataRow>
           </div>
