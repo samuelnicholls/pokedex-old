@@ -16,7 +16,7 @@ type PokemonType = {
 const Home: NextPage = () => {
   const {
     data,
-    error,
+    isError,
     isLoading,
     fetchNextPage,
     hasNextPage,
@@ -32,10 +32,13 @@ const Home: NextPage = () => {
     : "Nothing more to load";
 
   return (
-    <Layout title="Pokedex">
+    <div className="container mx-auto">
       <Title text="Pokedex" />
-      <>
-        {error && <Error />}
+      <div className="container md:my-12 mx-auto px-4 md:px-12">
+
+      </div>
+
+        {isError && <Error />}
         {isLoading ? (
           <Loader />
         ) : (
@@ -47,7 +50,7 @@ const Home: NextPage = () => {
                 ))
               )}
             </ul>
-            {!error && (
+            {!isError && (
               <div className="mt-8 flex justify-center">
                 <Button
                   title={decideButtonText}
@@ -58,8 +61,7 @@ const Home: NextPage = () => {
             )}
           </>
         )}
-      </>
-    </Layout>
+    </div>
   );
 };
 
