@@ -1,0 +1,6 @@
+{
+  "trailingComma": "all",
+  "singleQuote": true,
+  "importOrder": ["^(next/(.*)$)|^(next$)", "^@/components/(.*)$", "^./api[./]|^../api[./]", "^@/hooks/(.*)$", "^@/types(.*)$", "^@/utils(.*)$", "^[./]"],
+  "importOrderSortSpecifiers": true
+}
