@@ -11,7 +11,7 @@ const Layout: FC<LayoutProps> = ({ children }) => {
   return (
     <div className="flex min-h-screen flex-col items-center justify-center">
       <Head>
-        <title>Movie Listing</title>
+        <title>Pokedex</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Header />

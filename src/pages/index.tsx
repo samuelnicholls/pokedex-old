@@ -34,10 +34,10 @@ const Home: NextPage = () => {
     <div className="container mx-auto">
       <Title text="Pokedex" />
       <div className="container md:my-12 mx-auto px-4 md:px-12">
+        {isError && (
+          <Error text="Error loading Pokemon, please refresh and try again." />
+        )}
 
-      </div>
-
-        {isError && <Error />}
         {isLoading ? (
           <Loader />
         ) : (
@@ -60,6 +60,7 @@ const Home: NextPage = () => {
             )}
           </>
         )}
+              </div>
     </div>
   );
 };
