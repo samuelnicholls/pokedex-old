@@ -30,7 +30,8 @@ const Pokemon: FunctionComponent<Props> = ({ pokemon }) => {
   );
 
   return (
-    <Link href={`/pokemon/${pokemon.name}`} className="flex flex-col items-center rounded-md shadow-lg p-4 text-white bg-neutral-600">
+    <Link href={`/pokemon/${pokemon.name}`} >
+      <div className="flex flex-col items-center rounded-md shadow-lg p-4 text-white bg-neutral-600">
       <p className="text-xl">{"#" + pokemonIndex}</p>
       <div className="w-40 mr-2 rounded-full inline">
         <Image
@@ -51,6 +52,8 @@ const Pokemon: FunctionComponent<Props> = ({ pokemon }) => {
           <li key={index}>{showPokemonType(type.type.name)}</li>
         ))}
       </ul>
+      </div>
+
     </Link>
   );
 };

@@ -1,7 +1,6 @@
 import type { NextPage } from "next";
 import { useInfiniteQuery } from "react-query";
 import fetchAllPokemon from "./api/fetchAllPokemon";
-import Layout from "../components/Layout";
 import Pokemon from "../components/Pokemon";
 import Button from "../components/Button";
 import Loader from "../components/Loader";

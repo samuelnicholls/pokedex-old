@@ -29,11 +29,7 @@ export default function Pokemon() {
   const pageTitle = pokemonName ? pokemonName : "Pokemon";
 
   return (
-    <Layout
-      title={`Pokedex | ${pageTitle}`}
-      showBackButton={true}
-      backButtonOnClick={() => router.back()}
-    >
+    <div>
       <Title text={pageTitle} />
       {isLoading ? (
         <Loader />
@@ -84,6 +80,6 @@ export default function Pokemon() {
           </div>
         </div>
       )}
-    </Layout>
+    </div>
   );
 }

@@ -1,34 +1,24 @@
-import Head from "next/head";
-import React, { FunctionComponent, ReactNode } from "react";
-import Button from "../components/Button";
+import { FC } from 'react';
+import Head from 'next/head';
+import Footer from './Footer';
+import Header from './Header';
 
-type Props = {
-  title: string;
-  children: ReactNode;
-  showBackButton?: boolean;
-  backButtonOnClick?: (event: React.MouseEvent<HTMLButtonElement>) => void;
+export type LayoutProps = {
+  children: JSX.Element;
 };
 
-const Layout: FunctionComponent<Props> = ({
-  title,
-  children,
-  showBackButton,
-  backButtonOnClick,
-}) => {
+const Layout: FC<LayoutProps> = ({ children }) => {
   return (
-    <div className="bg-neutral-500">
+    <div className="flex min-h-screen flex-col items-center justify-center">
       <Head>
-        <title>{title}</title>
+        <title>Movie Listing</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <main className="container mx-auto min-h-screen py-6 px-4 lg:py-16">
-        {showBackButton && backButtonOnClick && (
-          <div className="mb-4">
-            <Button title="Back" onClick={backButtonOnClick} />
-          </div>
-        )}
+      <Header />
+      <main className="flex w-full flex-1 flex-col py-8 lg:py-20 text-center bg-gray-800">
         {children}
       </main>
+      <Footer />
     </div>
   );
 };
