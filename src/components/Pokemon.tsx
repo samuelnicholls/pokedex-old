@@ -30,29 +30,27 @@ const Pokemon: FunctionComponent<Props> = ({ pokemon }) => {
   );
 
   return (
-    <Link href={`/pokemon/${pokemon.name}`}>
-      <a className="flex flex-col items-center rounded-md shadow-lg p-4 text-white bg-neutral-600">
-        <p className="text-xl">{"#" + pokemonIndex}</p>
-        <div className="w-40 mr-2 rounded-full inline">
-          <Image
-            src={imageUrl}
-            alt={pokemon.name}
-            className="p-2"
-            width="200"
-            height="200"
-          />
-        </div>
-        <div className="w-full">
-          <p className="text-center text-2xl mb-4 capitalize mt-4">
-            {pokemon.name}
-          </p>
-        </div>
-        <ul className="mt-4 pb-2 flex flex-wrap justify-center gap-2">
-          {data?.response.types.map((type: PokemonType, index: number) => (
-            <li key={index}>{showPokemonType(type.type.name)}</li>
-          ))}
-        </ul>
-      </a>
+    <Link href={`/pokemon/${pokemon.name}`} className="flex flex-col items-center rounded-md shadow-lg p-4 text-white bg-neutral-600">
+      <p className="text-xl">{"#" + pokemonIndex}</p>
+      <div className="w-40 mr-2 rounded-full inline">
+        <Image
+          src={imageUrl}
+          alt={pokemon.name}
+          className="p-2"
+          width="200"
+          height="200"
+        />
+      </div>
+      <div className="w-full">
+        <p className="text-center text-2xl mb-4 capitalize mt-4">
+          {pokemon.name}
+        </p>
+      </div>
+      <ul className="mt-4 pb-2 flex flex-wrap justify-center gap-2">
+        {data?.response.types.map((type: PokemonType, index: number) => (
+          <li key={index}>{showPokemonType(type.type.name)}</li>
+        ))}
+      </ul>
     </Link>
   );
 };
